@@ -1,0 +1,115 @@
+<div class="container-fluid py-5">
+  <div class="container">
+    <!-- Header -->
+    <div class="row mb-4">
+      <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <h1 class="h2 fw-bold mb-2" style="color: #333;">
+              <i class="fas fa-warehouse me-2" style="color: #0FA650;"></i>Inventario
+            </h1>
+            <p class="text-muted">Consulta el estado del inventario de granos</p>
+          </div>
+          <div>
+            <a routerLink="/" class="btn btn-primary btn-lg rounded-3">
+              <i class="fas fa-arrow-left me-2"></i>Volver al inicio
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Estadísticas -->
+    <div class="row mb-4">
+      <div class="col-lg-4 mb-3">
+        <div class="card border-0 shadow-lg rounded-4"
+          style="background: linear-gradient(135deg, #4e73df 0%, #224abe 100%); backdrop-filter: blur(10px);">
+          <div class="card-body" style="color: white;">
+            <p class="card-text text-light">Total de Registros</p>
+            <h2 class="display-5 fw-bold">{{ inventarios.length }}</h2>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 mb-3">
+        <div class="card border-0 shadow-lg rounded-4"
+          style="background: linear-gradient(135deg, #f6c23e 0%, #dda20a 100%); backdrop-filter: blur(10px);">
+          <div class="card-body" style="color: white;">
+            <p class="card-text text-light">Stock Total (kg)</p>
+            <h2 class="display-5 fw-bold">{{ stockTotal | number:'1.0-0' }}</h2>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 mb-3">
+        <div class="card border-0 shadow-lg rounded-4"
+          style="background: linear-gradient(135deg, #36b9cc 0%, #258391 100%); backdrop-filter: blur(10px);">
+          <div class="card-body" style="color: white;">
+            <p class="card-text text-light">Valor Total ($)</p>
+            <h2 class="display-5 fw-bold">{{ valorTotal | currency }}</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabla -->
+    <div class="row">
+      <div class="col-12">
+        <div class="card border-0 shadow-lg rounded-4">
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table table-hover mb-0">
+                <thead style="background: linear-gradient(135deg, #343a40 0%, #60616f 100%);">
+                  <tr>
+                    <th class="text-white py-3 ps-4">ID</th>
+                    <th class="text-white py-3">Grano</th>
+                    <th class="text-white py-3">Cantidad (kg)</th>
+                    <th class="text-white py-3">Precio Unitario ($)</th>
+                    <th class="text-white py-3">Subtotal ($)</th>
+                    <th class="text-white py-3">Fecha Ingreso</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Loading State -->
+                  <tr *ngIf="isLoading">
+                    <td colspan="6" class="text-center py-5">
+                      <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Cargando...</span>
+                      </div>
+                      <p class="mt-2 text-muted">Cargando inventario...</p>
+                    </td>
+                  </tr>
+
+                  <!-- Data State -->
+                  <ng-container *ngIf="!isLoading">
+                    <tr *ngFor="let item of inventarios" class="border-bottom">
+                      <td class="py-3 ps-4">
+                        <span class="badge rounded-pill bg-light text-dark border">{{ item.id_inventario }}</span>
+                      </td>
+                      <td class="py-3 fw-semibold">{{ item.nombre_grano }}</td>
+                      <td class="py-3">
+                        <i class="fas fa-cubes me-2 text-warning"></i>{{ item.cantidad | number:'1.2-2' }}
+                      </td>
+                      <td class="py-3">{{ item.precio_unitario | currency }}</td>
+                      <td class="py-3">
+                        <strong class="text-success">{{ (item.cantidad * item.precio_unitario) | currency }}</strong>
+                      </td>
+                      <td class="py-3">{{ item.fecha_ingreso | date:'short' }}</td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- No Data State -->
+            <div *ngIf="!isLoading && inventarios.length === 0" class="text-center py-5">
+              <i class="fas fa-inbox fa-4x text-muted mb-3" style="opacity: 0.5;"></i>
+              <p class="text-muted">No hay registros de inventario</p>
+              <a routerLink="/" class="btn btn-primary mt-3">
+                Volver al inicio
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

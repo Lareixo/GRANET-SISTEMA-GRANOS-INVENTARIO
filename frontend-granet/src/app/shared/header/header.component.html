@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="container">
+        <a class="navbar-brand fw-bold" routerLink="/home.component">
+            <img src="/frontend-granet/assets/granet-sinfondo.png" alt="Logo" class="logo">
+        </a>
+        <button class="navbar-toggler" type="button" (click)="toggleMenu()" aria-controls="navbarNav"
+            [attr.aria-expanded]="!isMenuCollapsed" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" [class.show]="!isMenuCollapsed" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-center">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{exact: true}">
+                        <i class="fas fa-home me-2"></i>Inicio
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/proveedores" routerLinkActive="active">
+                        <i class="fas fa-users me-2"></i>Proveedores
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/granos" routerLinkActive="active">
+                        <i class="fas fa-leaf me-2"></i>Granos
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/inventario" routerLinkActive="active">
+                        <i class="fas fa-warehouse me-2"></i>Inventario
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

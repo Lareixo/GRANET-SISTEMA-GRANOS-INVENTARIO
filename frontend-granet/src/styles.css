@@ -1,0 +1,68 @@
+/* Global Styles & Variables */
+:root {
+  --theme-green: #067335;
+  --theme-green-dark: #045d2b;
+  --text-light: #FFFFFF;
+  --text-dark: #333333;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  /* Light green transparent effect (very pale green) */
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  min-height: 100vh;
+  color: var(--text-dark);
+}
+
+/* Navbar Customization */
+.navbar-custom {
+  /* Specific green #067335 with subtle gradient */
+  background: linear-gradient(90deg, #067335 0%, #09853e 100%) !important;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding-top: 1.2rem !important;
+  padding-bottom: 1.2rem !important;
+}
+
+.navbar-custom .navbar-brand,
+.navbar-custom .nav-link {
+  color: var(--text-light) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-custom .nav-link:hover {
+  color: #e8f5e9 !important;
+  transform: translateY(-1px);
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: #067335;
+  border-color: #067335;
+}
+
+.btn-primary:hover {
+  background-color: #045d2b;
+  border-color: #045d2b;
+}
+
+/* Cards */
+.card {
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Tables */
+.table-custom thead {
+  background-color: #067335;
+  color: var(--text-light);
+}
+
+/* Footer */
+.footer-custom {
+  background: linear-gradient(90deg, #067335 0%, #09853e 100%);
+  backdrop-filter: blur(10px);
+  color: var(--text-light);
+  padding: 3.5rem 0;
+  margin-top: auto;
+}

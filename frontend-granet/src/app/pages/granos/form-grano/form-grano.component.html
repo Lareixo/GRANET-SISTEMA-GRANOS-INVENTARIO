@@ -1,0 +1,100 @@
+<div class="container-fluid py-5" style="background: linear-gradient(135deg, rgba(245, 245, 245, 0.95) 0%, rgba(250, 250, 250, 0.95) 100%); min-height: 100vh;">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <div class="card border-0 shadow-lg rounded-4" style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px);">
+          <div class="card-body p-5">
+            <h1 class="h2 fw-bold mb-2" style="color: #333;">
+              <i class="fas fa-leaf me-2" style="color: #6B8E23;"></i>Registrar Grano
+            </h1>
+            <p class="text-muted mb-4">Ingresa los datos del nuevo grano</p>
+
+            <form [formGroup]="formulario" (ngSubmit)="guardarGrano()" novalidate>
+              <!-- Nombre -->
+              <div class="mb-3">
+                <label for="nombre" class="form-label fw-semibold">Nombre del Grano</label>
+                <input 
+                  type="text" 
+                  class="form-control form-control-lg rounded-3" 
+                  id="nombre"
+                  formControlName="nombre"
+                  placeholder="Ej: Trigo"
+                >
+                <div class="text-danger small mt-1" *ngIf="formulario.get('nombre')?.invalid && formulario.get('nombre')?.touched">
+                  El nombre es requerido
+                </div>
+              </div>
+
+              <!-- Tipo -->
+              <div class="mb-3">
+                <label for="tipo" class="form-label fw-semibold">Tipo de Grano</label>
+                <select 
+                  class="form-select form-select-lg rounded-3" 
+                  id="tipo"
+                  formControlName="tipo"
+                >
+                  <option value="">Selecciona un tipo</option>
+                  <option value="cereal">Cereal</option>
+                  <option value="legumbre">Legumbre</option>
+                  <option value="oleaginosa">Oleaginosa</option>
+                  <option value="otro">Otro</option>
+                </select>
+                <div class="text-danger small mt-1" *ngIf="formulario.get('tipo')?.invalid && formulario.get('tipo')?.touched">
+                  El tipo es requerido
+                </div>
+              </div>
+
+              <!-- Proveedor -->
+              <div class="mb-4">
+                <label for="proveedor" class="form-label fw-semibold">Proveedor</label>
+                <select 
+                  class="form-select form-select-lg rounded-3" 
+                  id="proveedor"
+                  formControlName="id_proveedor"
+                >
+                  <option value="">Selecciona un proveedor</option>
+                  <option *ngFor="let proveedor of proveedores" [value]="proveedor.id_proveedor">
+                    {{ proveedor.nombre }}
+                  </option>
+                </select>
+                <div class="text-danger small mt-1" *ngIf="formulario.get('id_proveedor')?.invalid && formulario.get('id_proveedor')?.touched">
+                  El proveedor es requerido
+                </div>
+              </div>
+
+              <!-- Botones -->
+              <div class="d-grid gap-2 d-md-flex">
+                <button 
+                  type="submit" 
+                  class="btn btn-primary btn-lg rounded-3 flex-grow-1"
+                  [disabled]="formulario.invalid || enviando"
+                >
+                  <span *ngIf="!enviando">
+                    <i class="fas fa-save me-2"></i>Guardar Grano
+                  </span>
+                  <span *ngIf="enviando">
+                    <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                    Guardando...
+                  </span>
+                </button>
+                <a routerLink="/" class="btn btn-secondary btn-lg rounded-3">
+                  <i class="fas fa-times me-2"></i>Cancelar
+                </a>
+              </div>
+
+              <!-- Mensaje de éxito -->
+              <div class="alert alert-success mt-3 rounded-3" *ngIf="mensajeExito" role="alert">
+                <i class="fas fa-check-circle me-2"></i>{{ mensajeExito }}
+              </div>
+
+              <!-- Mensaje de error -->
+              <div class="alert alert-danger mt-3 rounded-3" *ngIf="mensajeError" role="alert">
+                <i class="fas fa-exclamation-circle me-2"></i>{{ mensajeError }}
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

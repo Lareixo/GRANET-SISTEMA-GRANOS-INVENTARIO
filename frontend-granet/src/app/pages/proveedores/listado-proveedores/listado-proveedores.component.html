@@ -1,0 +1,78 @@
+<div class="container-fluid py-5">
+  <div class="container">
+    <!-- Header -->
+    <div class="row mb-4">
+      <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <h1 class="h2 fw-bold mb-2">
+              <i class="fas fa-users me-2" style="color: var(--secondary-color);"></i>Proveedores
+            </h1>
+            <p class="text-muted">Gestiona todos tus proveedores de granos</p>
+          </div>
+          <a routerLink="/registro-proveedor" class="btn btn-primary btn-lg rounded-3">
+            <i class="fas fa-plus me-2"></i>Agregar Proveedor
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabla -->
+    <div class="row">
+      <div class="col-12">
+        <div class="card border-0 shadow-lg rounded-4">
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table table-hover mb-0 table-custom">
+                <thead>
+                  <tr>
+                    <th class="py-3 ps-4">ID</th>
+                    <th class="py-3">Nombre</th>
+                    <th class="py-3">Email</th>
+                    <th class="py-3">Teléfono</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Loading State -->
+                  <tr *ngIf="isLoading">
+                    <td colspan="4" class="text-center py-5">
+                      <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Cargando...</span>
+                      </div>
+                      <p class="mt-2 text-muted">Cargando proveedores...</p>
+                    </td>
+                  </tr>
+
+                  <!-- Data State -->
+                  <ng-container *ngIf="!isLoading">
+                    <tr *ngFor="let proveedor of proveedores" class="border-bottom">
+                      <td class="py-3 ps-4">
+                        <span class="badge rounded-pill bg-secondary">{{ proveedor.id_proveedor }}</span>
+                      </td>
+                      <td class="py-3 fw-semibold">{{ proveedor.nombre }}</td>
+                      <td class="py-3">
+                        <i class="fas fa-envelope me-2 text-muted"></i>{{ proveedor.email }}
+                      </td>
+                      <td class="py-3">
+                        <i class="fas fa-phone me-2 text-muted"></i>{{ proveedor.telefono }}
+                      </td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- No Data State -->
+            <div *ngIf="!isLoading && proveedores.length === 0" class="text-center py-5">
+              <i class="fas fa-inbox fa-4x text-muted mb-3" style="opacity: 0.5;"></i>
+              <p class="text-muted">No hay proveedores registrados</p>
+              <a routerLink="/registro-proveedor" class="btn btn-primary mt-3">
+                Registrar primer proveedor
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
